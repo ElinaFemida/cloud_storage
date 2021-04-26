@@ -1,0 +1,14 @@
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox alignment="center" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal"
+      fx:controller="manager.Controller">
+<MenuBar>
+</MenuBar>
+
+<HBox VBox.vgrow="ALWAYS">
+
+</HBox>
+</HBox>
+</VBox>
