@@ -1,6 +1,7 @@
-package netty;
+package server_for_cloud;
 
-public class Main {
+
+public class Server_Main {
     public static void main(String[] args) throws Exception {
         int port;
         if (args.length > 0) {
@@ -8,8 +9,7 @@ public class Main {
         } else {
             port = 3606;
         }
-        //new NettyServer(port).run();
-        //new EchoServer(port).run();
-        new TimeServer(port).run();
+        new ServerApp(port).run();
+
     }
 }

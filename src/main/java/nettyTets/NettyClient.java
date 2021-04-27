@@ -1,4 +1,4 @@
-package netty;
+package nettyTets;
 
 import simple.Simple_client;
 
@@ -9,13 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
-
-        import javax.swing.*;
-        import java.awt.*;
-        import java.awt.event.*;
-        import java.io.*;
-        import java.net.Socket;
-        import java.util.Scanner;
 
 public class NettyClient extends JFrame {
 

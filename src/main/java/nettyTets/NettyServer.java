@@ -1,4 +1,4 @@
-package netty;
+package nettyTets;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

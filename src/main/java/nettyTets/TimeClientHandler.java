@@ -1,13 +1,11 @@
-package netty;
+package nettyTets;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.internal.StringUtil;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
 import java.util.Objects;
 
 /*public class TimeClientHandler extends ChannelInboundHandlerAdapter {

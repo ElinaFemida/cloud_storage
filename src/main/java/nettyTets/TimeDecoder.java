@@ -1,4 +1,4 @@
-package netty;
+package nettyTets;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
