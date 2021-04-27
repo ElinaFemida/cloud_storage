@@ -16,7 +16,8 @@ public class Main extends Application {
         //Controller controller = fxmlLoader.getController();
         FirstController controller = fxmlLoader.getController();
         primaryStage.setTitle("File manager");
-        primaryStage.setScene(new Scene(root, 400, 150));
+        primaryStage.setScene(new Scene(root, 300, 160));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
