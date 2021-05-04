@@ -37,16 +37,17 @@ public class ClientNetwork {
                 workerGroup.shutdownGracefully();
             }
         });
-        t.start();
+        t.setDaemon(true);
+                t.start();
     }
 
-    public void close() throws IOException {
+    public void close() {
         channel.close();
     }
 
-    //public void sendMessage(String str) {
-        //channel.writeAndFlush(str);
-   // }
+    public void sendMessage(String str) {
+        channel.writeAndFlush(str);
+    }
 }
 
 
