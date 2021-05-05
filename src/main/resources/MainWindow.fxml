@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.skin.ProgressIndicatorSkin.IndeterminateSpinner.IndicatorPaths?>
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="manager.MainController" stylesheets="styles.css">
+    <children>
+        <TextField editable="false" fx:id="pathField" focusTraversable="false"/>
+        <ListView VBox.vgrow="ALWAYS" fx:id="filesList" onMouseClicked="#FilesListClicked"/>
+        <fx:include source="serverCatalog.fxml" fx:id="serverCatalog" HBox.hgrow="ALWAYS"/>
+        <HBox spacing="5">
+
+            <Button text="Войти в систему" HBox.hgrow="ALWAYS" maxWidth="Infinity" onAction="#auth" fx:id="auth"/>
+            <Button text="Копировать" HBox.hgrow="ALWAYS" maxWidth="Infinity" onAction="#copy"/>
+            <Button text="Переместить" HBox.hgrow="ALWAYS" maxWidth="Infinity" onAction="#changeDir"/>
+            <Button text="Удалить" HBox.hgrow="ALWAYS" maxWidth="Infinity" onAction="#delete"/>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </padding>
+        </HBox>
+
+    </children>
+</VBox>
