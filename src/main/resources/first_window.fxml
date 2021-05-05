@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox  prefHeight="170.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+       fx:controller="manager.FirstController" stylesheets="styles.css">
+   <children>
+      <TextArea focusTraversable="false" prefHeight="25.0" prefWidth="300.0" text="Введите логин:" />
+      <TextField editable="true" focusTraversable="true" prefHeight="25.0" prefWidth="300.0" fx:id="login" />
+      <TextArea focusTraversable="false" prefHeight="25.0" prefWidth="300.0" text="Введите пароль:"/>
+      <TextField editable="true" prefHeight="25.0" prefWidth="300.0" fx:id="password" />
+      <HBox prefHeight="100.0" prefWidth="300.0">
+         <children>
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                    text="Войти" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" onAction="#authorize" fx:id="auth" />
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                    text="Регистрация" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" onAction="#register" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>
