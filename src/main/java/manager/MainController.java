@@ -139,13 +139,30 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
     }
+    public void changeDir(ActionEvent actionEvent) {
+    }
+
+    public String getSelectedFilename() {
+        if (!filesList.isFocused()) {
+            return null;
+        }
+        return filesList.getSelectionModel().getSelectedItem().getName();
+    }
 
     public void copy(ActionEvent actionEvent) {
     }
 
-    public void delete(ActionEvent actionEvent) {
+    public void delete(MouseEvent actionEvent) {
+        String deletedFile = getSelectedFilename().toString();
+        System.out.println(deletedFile);
+        try {
+            Files.delete(Paths.get(deletedFile));
+        } catch (IOException e) {
+            System.err.println(e);
+        }
     }
 
-    public void changeDir(ActionEvent actionEvent) {
+    public String getCurrentPath() {
+        return pathField.getText();
     }
 }
