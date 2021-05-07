@@ -1,8 +1,6 @@
 package manager;
 
-import dataBase.FileInfo;
-import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
+import common.FileInfo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
@@ -25,7 +22,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -133,8 +129,8 @@ public class MainController implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
             stage.showAndWait();
-            //stage.show();
             stage.setOnCloseRequest(e -> stage.close());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -149,7 +145,8 @@ public class MainController implements Initializable {
         return filesList.getSelectionModel().getSelectedItem().getName();
     }
 
-    public void copy(ActionEvent actionEvent) {
+    public void sync (ActionEvent actionEvent) {
+
     }
 
     public void delete(MouseEvent actionEvent) {

@@ -17,7 +17,7 @@
         <HBox spacing="5">
 
             <Button text="Войти в систему" HBox.hgrow="ALWAYS" maxWidth="Infinity" onAction="#auth" fx:id="auth"/>
-            <Button text="Копировать" HBox.hgrow="ALWAYS" maxWidth="Infinity" onAction="#copy"/>
+            <Button text="Синхронизировать" HBox.hgrow="ALWAYS" maxWidth="Infinity" onAction="#sync"/>
             <Button text="Переместить" HBox.hgrow="ALWAYS" maxWidth="Infinity" onAction="#changeDir"/>
             <Button text="Удалить" HBox.hgrow="ALWAYS" maxWidth="Infinity" onAction="#delete"/>
             <padding>

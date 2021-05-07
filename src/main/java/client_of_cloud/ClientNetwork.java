@@ -7,6 +7,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+
 import java.io.IOException;
 
 public class ClientNetwork {
@@ -20,13 +21,16 @@ public class ClientNetwork {
             NioEventLoopGroup workerGroup = new NioEventLoopGroup();
             try {
                 Bootstrap b = new Bootstrap()
-                .group(workerGroup)
+                        .group(workerGroup)
                         .channel(NioSocketChannel.class)
                         .handler(new ChannelInitializer<SocketChannel>() {
                             @Override
                             protected void initChannel(SocketChannel ch) {
                                 channel = ch;
-                                ch.pipeline().addLast(new StringDecoder(), new StringEncoder());
+                                ch.pipeline().addLast(
+                                        new StringDecoder(),
+                                        new StringEncoder(),
+                                        new ClientHandler());
                             }
                         });
                 ChannelFuture future = b.connect(SERVER_HOST, SERVER_PORT).sync();
@@ -38,7 +42,7 @@ public class ClientNetwork {
             }
         });
         t.setDaemon(true);
-                t.start();
+        t.start();
     }
 
     public void close() {

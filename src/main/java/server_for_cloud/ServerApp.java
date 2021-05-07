@@ -9,6 +9,9 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
 
+import io.netty.handler.codec.serialization.ClassResolvers;
+import io.netty.handler.codec.serialization.ObjectDecoder;
+import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
@@ -31,13 +34,10 @@ public class ServerApp {
                         @Override
                         public void initChannel(NioSocketChannel ch) throws Exception {
                             ch.pipeline().addLast(
-                                    new StringDecoder(),
-                                    new StringEncoder(),
-                                    new ServerHandler(),
-                                    new LengthFieldBasedFrameDecoder(1024*1024, 0, 4, 0, 4),
-                                    new LengthFieldPrepender(4),
-
+                                    new ObjectDecoder(1024*1024, ClassResolvers.cacheDisabled(null)),
+                                    new ObjectEncoder(),
                                     new ServerHandler());
+
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)
