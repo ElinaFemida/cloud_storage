@@ -1,10 +1,14 @@
 package client_of_cloud;
 
+import common.JsonDecoder;
+import common.JsonEncoder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
@@ -28,9 +32,11 @@ public class ClientNetwork {
                             protected void initChannel(SocketChannel ch) {
                                 channel = ch;
                                 ch.pipeline().addLast(
-                                        new StringDecoder(),
+                                        new LengthFieldBasedFrameDecoder(1024*1024,0,3,0,3),
+                                        new LengthFieldPrepender(3),
                                         new StringEncoder(),
-                                        new ClientHandler());
+                                        new JsonDecoder(),
+                                        new JsonEncoder());
                             }
                         });
                 ChannelFuture future = b.connect(SERVER_HOST, SERVER_PORT).sync();

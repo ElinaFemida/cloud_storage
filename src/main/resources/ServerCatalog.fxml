@@ -13,7 +13,7 @@
     <HBox spacing="5">
         <ListView fx:id="serverFilesList" onMouseClicked="#FilesListClicked"/>
     </HBox>
-<properties>
-    <ctrl><fx:reference source="controller"/></ctrl>
-</properties>
+    <properties>
+        <ctrl><fx:reference source="controller"/></ctrl>
+    </properties>
 </VBox>
