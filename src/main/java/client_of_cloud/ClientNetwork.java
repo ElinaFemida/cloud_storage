@@ -1,65 +1,53 @@
 package client_of_cloud;
 
-import common.JsonDecoder;
-import common.JsonEncoder;
-import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.*;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
-import io.netty.handler.codec.LengthFieldPrepender;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
 
+import common.AbstractRequest;
+import io.netty.handler.codec.serialization.ObjectDecoderInputStream;
+import io.netty.handler.codec.serialization.ObjectEncoderOutputStream;
 import java.io.IOException;
+import java.net.Socket;
 
 public class ClientNetwork {
-    private SocketChannel channel;
-    private static final String SERVER_HOST = "localhost";
-    private static final int SERVER_PORT = 3606;
+    private static Socket socket;
+    private static ObjectEncoderOutputStream out;
+    public static ObjectDecoderInputStream in;
 
-
-    public ClientNetwork() {
-        Thread t = new Thread(() -> {
-            NioEventLoopGroup workerGroup = new NioEventLoopGroup();
-            try {
-                Bootstrap b = new Bootstrap()
-                        .group(workerGroup)
-                        .channel(NioSocketChannel.class)
-                        .handler(new ChannelInitializer<SocketChannel>() {
-                            @Override
-                            protected void initChannel(SocketChannel ch) {
-                                channel = ch;
-                                ch.pipeline().addLast(
-                                        new LengthFieldBasedFrameDecoder(1024*1024,0,3,0,3),
-                                        new LengthFieldPrepender(3),
-                                        new StringEncoder(),
-                                        new JsonDecoder(),
-                                        new JsonEncoder());
-                            }
-                        });
-                ChannelFuture future = b.connect(SERVER_HOST, SERVER_PORT).sync();
-                future.channel().closeFuture().sync();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                workerGroup.shutdownGracefully();
-            }
-        });
-        t.setDaemon(true);
-        t.start();
+    public static void start() {
+        try {
+            socket = new Socket("localhost", 3606);
+            out = new ObjectEncoderOutputStream(socket.getOutputStream());
+            in = new ObjectDecoderInputStream(socket.getInputStream(), 1024 * 1024);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void close() {
-        channel.close();
+    public static void stop() {
+        try {
+            out.close();
+            in.close();
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void sendMessage(String str) {
-        channel.writeAndFlush(str);
+    public static boolean sendMsg(AbstractRequest msg) {
+        try {
+
+            out.writeObject(msg);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static AbstractRequest readMsg() throws ClassNotFoundException, IOException{
+        Object obj = in.readObject();
+        return (AbstractRequest) obj;
     }
 }
-
 
 
 

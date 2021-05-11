@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="center" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="client_of_cloud.MainController" stylesheets="styles.css">
+
+    <MenuBar>
+        <Menu text="Серверная папка" />
+
+    </MenuBar>
+    <TextField fx:id="Field" editable="false" HBox.hgrow="ALWAYS"/>
+
+    <ListView fx:id="filesServerList" prefWidth="248.0" VBox.vgrow="ALWAYS" />
+
+    <HBox spacing="3">
+        <Button focusTraversable="false" maxWidth="Infinity" onAction="#DownloadFromServerBtn" text="Скачать файл" HBox.hgrow="ALWAYS" />
+        <Button focusTraversable="false" maxWidth="Infinity" onAction="#DeleteFromServerBtn" text="Удалить файл" HBox.hgrow="ALWAYS" />
+        <Button onAction="#updateServerListBtn" text="Обновить" HBox.hgrow="ALWAYS" focusTraversable="false" maxWidth="Infinity"/>
+        <padding>
+            <Insets bottom="1.0" left="3.0" right="3.0" top="1.0" />
+        </padding>
+    </HBox>
+
+
+</VBox>

@@ -26,7 +26,6 @@ public class ServerHandler extends SimpleChannelInboundHandler <Object> {
         ByteBuf buf = (ByteBuf)data;
         while (buf.readableBytes() > 0) {
             System.out.println("Пользователь отправляет данные");
-            // обрабатывать эти данные и обновлять в папке сервера соответствующие файлы
         }
         buf.release();
     }

@@ -1,7 +1,14 @@
 package common;
 
-public class Auth extends Commands{
-    public Auth() {
-        this.command = Command.AUTH;
+public class Auth  extends AbstractRequest {
+    private final String folderName;
+
+    public String getLogin() {
+        return folderName;
     }
+
+    public Auth(String folderName) {
+        this.folderName = folderName;
+    }
+
 }
