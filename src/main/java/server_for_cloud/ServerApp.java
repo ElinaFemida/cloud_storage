@@ -1,7 +1,5 @@
 package server_for_cloud;
 
-import common.JsonDecoder;
-import common.JsonEncoder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -10,6 +8,9 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
+import io.netty.handler.codec.serialization.ClassResolvers;
+import io.netty.handler.codec.serialization.ObjectDecoder;
+import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.codec.string.StringEncoder;
 
 
@@ -33,9 +34,11 @@ public class ServerApp {
                             ch.pipeline().addLast(
                                     new LengthFieldBasedFrameDecoder(1024*1024,0,3,0,3),
                                     new LengthFieldPrepender(3),
+                                    new ObjectDecoder(50 * 1024 * 1024, ClassResolvers.cacheDisabled(null)),
+                                    new ObjectEncoder(),
                                     new StringEncoder(),
-                                    new JsonDecoder(),
-                                    new JsonEncoder(),
+                                    //new JsonDecoder(),
+                                    //new JsonEncoder(),
                                     new ServerHandler());
                         }
                     })

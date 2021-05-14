@@ -7,64 +7,70 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+public class FileInfo extends AbstractRequest {
+    public enum FileType{
+        FILE("F"), DIRECTORY("D");
 
-public class FileInfo {
-    public static final String UP_ROOT = "[..]";
-    private String name;
-    private long size;
-    private LocalDateTime date;
+        private final String TypeName;
 
-
-    public FileInfo(String name, long size) {
-        this.name = name;
-        this.size = size;
-        this.date = date;
-
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public long getSize() {
-        return size;
-    }
-
-    public void setSize(long size) {
-        this.size = size;
-    }
-
-    public FileInfo(Path path) {
-        try {
-            this.name = path.getFileName().toString();
-            if (Files.isDirectory(path)) {
-                this.size = -1L;
-            } else {
-                this.size = Files.size(path);
-            }
-            this.date = LocalDateTime.ofInstant(Files.getLastModifiedTime(path).toInstant(), ZoneOffset.ofHours(3));
-        } catch (IOException e) {
-            throw new RuntimeException("Something wrong with file " + path.toAbsolutePath().toString());
+        public String getTypeName(){
+            return TypeName;
         }
+
+        FileType(String name){
+            this.TypeName = name;
+        }
+
     }
 
-    public boolean isDir() {
-        return size == -1L;
+    private String fileName;
+    private FileType fileType;
+    private long fileSize;
+    private LocalDateTime fileDate;
+
+    public String getFileName(){
+        return fileName;
     }
 
-    public boolean isUpElement() {
-        return size == -2L;
+    public void setFileName(String fileName){
+        this.fileName = fileName;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public FileType getFileType(){
+        return fileType;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setType(){
+        this.fileType = fileType;
+    }
+
+    public long getFileSize(){
+        return fileSize;
+    }
+
+    public void setSize(){
+        this.fileSize = fileSize;
+    }
+
+    public LocalDateTime getFileDate() {
+        return fileDate;
+    }
+
+    public void setFileDate(LocalDateTime fileDate) {
+        this.fileDate = fileDate;
+    }
+
+    public FileInfo(Path path){
+        try {
+            this.fileName = path.getFileName().toString();
+            this.fileSize = Files.size(path);
+            this.fileType = Files.isDirectory(path) ? FileType.DIRECTORY : FileType.FILE;
+            if (this.fileType == FileType.DIRECTORY){
+                this.fileSize = -1L;
+            }
+            this.fileDate = LocalDateTime.ofInstant(Files.getLastModifiedTime(path).toInstant(), ZoneOffset.ofHours(3));
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
     }
 }
