@@ -38,7 +38,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ClientNetwork.start();
+        //ClientNetwork.start();
     }
 
     public void createTextField(){
