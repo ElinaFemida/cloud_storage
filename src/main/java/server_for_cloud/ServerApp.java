@@ -37,8 +37,6 @@ public class ServerApp {
                                     new ObjectDecoder(50 * 1024 * 1024, ClassResolvers.cacheDisabled(null)),
                                     new ObjectEncoder(),
                                     new StringEncoder(),
-                                    //new JsonDecoder(),
-                                    //new JsonEncoder(),
                                     new ServerHandler());
                         }
                     })

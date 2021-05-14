@@ -6,5 +6,5 @@
     -fx-background-color: #EEE;
 }
 .list-cell:selected{
-    -fx-background-color: #33A;
+    -fx-background-color: #AAA;
 }
