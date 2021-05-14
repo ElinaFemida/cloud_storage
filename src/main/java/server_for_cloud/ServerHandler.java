@@ -1,12 +1,13 @@
 package server_for_cloud;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-public class ServerHandler extends SimpleChannelInboundHandler <String> {
+public class ServerHandler extends SimpleChannelInboundHandler <Object> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("New client connection");
+        System.out.println("New client connection" + ctx);
     }
 
     @Override
@@ -21,8 +22,13 @@ public class ServerHandler extends SimpleChannelInboundHandler <String> {
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, String msg) throws Exception {
-        System.out.println("message: " + msg);
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, Object data) throws Exception {
+        ByteBuf buf = (ByteBuf)data;
+        while (buf.readableBytes() > 0) {
+            System.out.println("Пользователь отправляет данные");
+            // обрабатывать эти данные и обновлять в папке сервера соответствующие файлы
+        }
+        buf.release();
     }
 
 

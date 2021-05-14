@@ -1,15 +1,11 @@
-package dataBase;
+package common;
 
-
-import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.TableColumn;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 
 
 public class FileInfo {
