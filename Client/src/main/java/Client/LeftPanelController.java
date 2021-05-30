@@ -1,7 +1,6 @@
-package client_of_cloud;
+package Client;
 
-import common.FileInfo;
-import common.FileMessage;
+import Common.*;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -11,6 +10,7 @@ import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,6 +23,9 @@ public class LeftPanelController implements Initializable {
 
     @FXML
     TableView<FileInfo> filesTable;
+
+    @FXML
+    ComboBox <String> disksBox;
 
     @FXML
     TextField pathField;
@@ -64,7 +67,11 @@ public class LeftPanelController implements Initializable {
 
         filesTable.getColumns().addAll(fileTypeColumn, fileNameColumn, fileSizeColumn, fileDateColumn);
         filesTable.getSortOrder().addAll(fileTypeColumn);
-
+        disksBox.getItems().clear();
+        for (Path p : FileSystems.getDefault().getRootDirectories()){
+            disksBox.getItems().addAll(p.toString());
+        }
+        disksBox.getSelectionModel().select(0);
 
         filesTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2){
@@ -91,12 +98,12 @@ public class LeftPanelController implements Initializable {
     }
     public void btnPathUpAction() {
         Path upperPath = Paths.get(pathField.getText()).getParent();
-        if (upperPath != null) {
+        if (upperPath != null)  {
             updateList(upperPath);
         }
     }
 
-    public void selectDiskAction(ActionEvent actionEvent) { //
+    public void selectDiskAction(ActionEvent actionEvent) {
         ComboBox<String> element = (ComboBox<String>) actionEvent.getSource();
         updateList(Paths.get(element.getSelectionModel().getSelectedItem()));
     }
@@ -112,6 +119,11 @@ public class LeftPanelController implements Initializable {
         return pathField.getText();
     }
 
+    public void updateClientListBtn(ActionEvent actionEvent) {
+        updateList(Paths.get(pathField.getText()));
+    }
+
+
     public void deleteAction() {
         Path path = Paths.get(pathField.getText()).resolve(filesTable.getSelectionModel().getSelectedItem().getFileName());
         try {
@@ -125,7 +137,7 @@ public class LeftPanelController implements Initializable {
         }
 
     }
-    public void uploadToServer() throws IOException, NoSuchAlgorithmException { //TO server
+    public void uploadToServer() throws IOException, NoSuchAlgorithmException {
         Path path = Paths.get(pathField.getText()).resolve(filesTable.getSelectionModel().getSelectedItem().getFileName());
         ClientNetwork.sendMsg(new FileMessage(path));
         System.out.println("Отправлен на сервер");

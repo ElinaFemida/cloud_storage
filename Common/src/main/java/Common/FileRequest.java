@@ -1,4 +1,4 @@
-package common;
+package Common;
 
 public class FileRequest extends AbstractRequest {
     private final String fileName;

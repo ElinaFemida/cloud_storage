@@ -1,4 +1,4 @@
-package client_of_cloud;
+package Client;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Client_Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {

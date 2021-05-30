@@ -1,8 +1,8 @@
-package client_of_cloud;
+package Client;
 
 public class MainApp {
 
     public static void main(String[] args) {
-        Main.main(args);
+        Client_Main.main(args);
     }
 }

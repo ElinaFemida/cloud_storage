@@ -1,6 +1,6 @@
-package client_of_cloud;
+package Client;
 
-import common.*;
+import Common.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,9 +25,6 @@ public class MainController implements Initializable {
     VBox leftPanel, rightPanel;
 
     @FXML
-    TextField pathField;
-
-    @FXML
     TextField Field;
 
 
@@ -38,12 +35,12 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //ClientNetwork.start();
+        ClientNetwork.start();
     }
 
     public void createTextField(){
         String str = FirstController.folderName;
-        Field.setText("server_for_cloud/ServerStorage/" + str);
+        Field.setText("SERVER_FILES/ServerStorage//" + str);
     }
 
     public void DownloadFromServerBtn(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
@@ -54,7 +51,7 @@ public class MainController implements Initializable {
             AbstractRequest request = ClientNetwork.readMsg();
             if (request instanceof FileMessage) {
                 FileMessage fileMsg = (FileMessage) request;
-                Files.write(Paths.get("client_for_cloud/ClientStorage/",str, fileMsg.getFileName()), fileMsg.getData(), StandardOpenOption.CREATE);
+                Files.write(Paths.get("CLIENT_FILES/ClientStorage/",str, fileMsg.getFileName()), fileMsg.getData(), StandardOpenOption.CREATE);
             }
         }
     }

@@ -1,4 +1,4 @@
-package common;
+package Common;
 
 public class Auth  extends AbstractRequest {
     private final String folderName;

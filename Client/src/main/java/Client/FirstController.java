@@ -1,6 +1,6 @@
-package client_of_cloud;
+package Client;
 
-import common.Auth;
+import Common.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,9 +16,6 @@ public class FirstController {
     @FXML
     TextField login;
 
-    @FXML
-    TextField password;
-
     public static String getFolderName() {
         return folderName;
     }
@@ -32,12 +29,10 @@ public class FirstController {
     Label errorLabel;
 
     public void authorize() throws IOException {
-        if (login.getText().equalsIgnoreCase("login") && password.getText().equalsIgnoreCase("password")) {
         ClientNetwork.start();
         ClientNetwork.sendMsg(new Auth(login.getText()));
         folderName = login.getText();
         System.out.println(folderName);
-        }
         globParent.getScene().getWindow().hide();
         Parent root = FXMLLoader.load(getClass().getResource("/MainWindow.fxml"));
         Stage newWindow = new Stage();

@@ -1,4 +1,4 @@
-package client_of_cloud;
+package Client;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -51,7 +51,7 @@ public class FileWatcher implements Runnable {
         try {
             watchService = FileSystems.getDefault().newWatchService();
         } catch (IOException e1) {
-            System.out.println("directoryPath NOT found");
+            System.out.println("directoryPath not found");
             e1.printStackTrace();
         }
         try {
@@ -99,7 +99,7 @@ public class FileWatcher implements Runnable {
             String name = FirstController.getFolderName();
             FileWatcher fileWatcher = null;
             fileWatcher = new FileWatcher();
-            String directoryPath = "server_for_cloud/ServerStorage/" + name;
+            String directoryPath = "SERVER_FILES/ServerStorage/" + name;
             try {
                 fileWatcher.register(directoryPath);
             } catch (IOException | ClassNotFoundException e) {
